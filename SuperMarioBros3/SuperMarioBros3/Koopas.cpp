@@ -31,8 +31,7 @@ void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& botto
 
 int CKoopas::IsBlocking()
 {
-	if (state == KOOPAS_STATE_SHELL_STAND) return 1;
-	else return 0;
+	return 0;
 }
 
 
@@ -44,8 +43,17 @@ void CKoopas::OnNoCollision(DWORD dt)
 
 void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->obj->IsBlocking()) return;
+	
+	if (state == KOOPAS_STATE_SHELL_MOVE)
+	{
+		if (dynamic_cast<CGoomba*>(e->obj))
+		{
+			CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
+			goomba->SetState(GOOMBA_STATE_DIE);
+		}
+	}
 
+	if (!e->obj->IsBlocking()) return;
 	if (e->ny != 0)
 	{
 		vy = 0;
@@ -54,6 +62,8 @@ void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vx = -vx;
 	}
+	
+	
 }
 
 void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -102,20 +112,23 @@ void CKoopas::SetState(int state)
 			break;
 		case KOOPAS_STATE_SHELL_STAND:
 			vx = 0;
-			vy = 0;
 			break;
 		case KOOPAS_STATE_SHELL_MOVE:
-			ay = KOOPAS_GRAVITY;
 			break;
 	}
 }
 
 void CKoopas::SetShellStateMoveSpeedLeft()
 {
-	vx = -0.1f;
+	vx = -0.2f;
 }
 
 void CKoopas::SetShellStateMoveSpeedRight()
 {
-	vx = 0.1f;
+	vx = 0.2f;
+}
+
+void CKoopas::SetYWhenColide()
+{
+	vy = -0.1f;
 }
