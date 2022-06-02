@@ -14,6 +14,9 @@ koopas.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 
+#HollowPlatform
+502	200	752	16	16	5	3	20001	20001	20001	11111	11112	11112	11113	11111	20001
+
 
 # MARIO
 0	30	750
@@ -22,11 +25,15 @@ koopas.txt
 #2	200	750	100
 
 #Brick
-1	300	784	
+#1	200	768
+#1	184	768	
 
 
 #Koopas
-3	200	750	100
+#3	200	750	100
+
+#HollowPlatform
+503	200	752	16	16	5	3
 
 #Platform
 5	10	800	16	16	39	11111	11112	11113
