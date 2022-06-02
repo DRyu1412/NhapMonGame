@@ -38,6 +38,7 @@ void CMario::OnNoCollision(DWORD dt)
 
 void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
+	
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
@@ -55,7 +56,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
-	else if (dynamic_cast<CKoopas*>(e->obj))
+	if (dynamic_cast<CKoopas*>(e->obj))
 		OnCollisionWithKoopas(e);
 }
 
@@ -122,8 +123,30 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 	{
 		if (koopas->GetState() == KOOPAS_STATE_WALKING)
 		{
-				koopas->SetState(KOOPAS_STATE_SHELL_STAND);
-				vy = -MARIO_JUMP_DEFLECT_SPEED;
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+			koopas->SetState(KOOPAS_STATE_SHELL_STAND);			
+		}
+		else if(koopas->GetState()==KOOPAS_STATE_SHELL_STAND)
+		{
+			vy = -0.4f;
+			koopas->SetYWhenColide();
+			if (vx > 0) 
+			{ 
+				koopas->SetShellStateMoveSpeedRight(); 
+				koopas->SetState(KOOPAS_STATE_SHELL_MOVE);
+			};
+			if (vx < 0) 
+			{ 
+				koopas->SetShellStateMoveSpeedLeft();
+				koopas->SetState(KOOPAS_STATE_SHELL_MOVE);
+			}
+			
+		}
+		else
+		{
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+			koopas->SetYWhenColide();
+			koopas->SetState(KOOPAS_STATE_SHELL_STAND);
 		}
 	}
 	else // hit by koopas
@@ -144,13 +167,14 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
 				}
 			}
 		}
+
 		if(koopas->GetState() == KOOPAS_STATE_SHELL_STAND)
 		{
 			if (e->nx < 0)	koopas->SetShellStateMoveSpeedRight();
 			if (e->nx > 0)	koopas->SetShellStateMoveSpeedLeft();
 			koopas->SetState(KOOPAS_STATE_SHELL_MOVE);
-			untouchable = 1;
-			untouchable_start = GetTickCount64() - 2500;
+			/*untouchable = 1;
+			untouchable_start = GetTickCount64() - 2500;*/
 		}
 	}
 }
