@@ -12,8 +12,16 @@ brickplatform.txt
 # type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
 # See OBJECT_TYPE constants in AssetIDs.h
 
+
+
 # MARIO
-0	1690	750
+0	30	750
+
+#Brick
+1	100	784
+1	300	784
+#Goomba
+2	200	750
 
 #Platform
 5	10	800	16	16	39	11111	11112	11113
