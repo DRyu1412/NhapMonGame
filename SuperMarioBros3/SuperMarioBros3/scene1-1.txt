@@ -8,6 +8,7 @@ cloud.txt
 brickplatform.txt
 koopas.txt
 hollowplatform.txt
+mushroom.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -41,7 +42,8 @@ hollowplatform.txt
 #2	250	784	100
 2	522	784	100
 
-
+#Mushroom
+6	200	720	16	16	14500
 
 #Brick
 1	1514	720	10100
@@ -70,7 +72,7 @@ hollowplatform.txt
 1	2266	688	10100
 1	2282	688	10100
 
-
+#1	200	720	11001
 
 
 #HollowPlatformBBox

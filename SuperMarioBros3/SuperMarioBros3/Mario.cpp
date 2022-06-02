@@ -8,6 +8,7 @@
 #include "Coin.h"
 #include "Portal.h"
 #include "Koopa.h"
+#include "Mushroom.h"
 
 #include "Collision.h"
 
@@ -52,12 +53,35 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
-	else if (dynamic_cast<CCoin*>(e->obj))
+	if (dynamic_cast<CCoin*>(e->obj))
 		OnCollisionWithCoin(e);
-	else if (dynamic_cast<CPortal*>(e->obj))
+	if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
 	if (dynamic_cast<CKoopa*>(e->obj))
 		OnCollisionWithKoopa(e);
+	if (dynamic_cast<CMushroom*>(e->obj))
+		OnCollisionWithMushroom(e);
+}
+
+void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
+{
+	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
+	if (mushroom->GetType() == MUSHROOM_TYPE_RED)
+	{
+		if (mushroom->GetState() == MUSHROOM_STATE_IDLE)
+			if (e->ny > 0)
+			{
+				vy = 0.4f;
+				mushroom->SetState(MUSHROOM_STATE_DROP);
+			}
+
+		if (mushroom->GetState() == MUSHROOM_STATE_DROP) 
+		{
+			SetLevel(MARIO_LEVEL_BIG);
+			e->obj->Delete();
+		}
+	}
+		
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
