@@ -140,6 +140,18 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
+	case OBJECT_TYPE_MUSHROOM:
+	{
+		int width = (int)atoi(tokens[3].c_str());
+		int height = (int)atoi(tokens[4].c_str());
+		int ID_ANI_MUSHROOM = atoi(tokens[5].c_str());
+
+		obj = new CMushroom(x, y, width, height, MUSHROOM_TYPE_RED, ID_ANI_MUSHROOM);
+
+		break;
+	}
+
+
 	case OBJECT_TYPE_PLATFORM:
 	{
 
