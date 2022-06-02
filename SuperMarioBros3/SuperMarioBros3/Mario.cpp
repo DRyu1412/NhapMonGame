@@ -7,6 +7,7 @@
 #include "Goomba.h"
 #include "Coin.h"
 #include "Portal.h"
+#include "Koopas.h"
 
 #include "Collision.h"
 
@@ -54,6 +55,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
+	else if (dynamic_cast<CKoopas*>(e->obj))
+		OnCollisionWithKoopas(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -109,6 +112,50 @@ void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 	CPortal* p = (CPortal*)e->obj;
 	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
 }
+
+void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
+{
+	CKoopas* koopas = dynamic_cast<CKoopas*>(e->obj);
+
+	// jump on top >> deflect a bit 
+	if (e->ny < 0)
+	{
+		if (koopas->GetState() == KOOPAS_STATE_WALKING)
+		{
+				koopas->SetState(KOOPAS_STATE_SHELL_STAND);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by koopas
+	{
+		if (koopas->GetState() != KOOPAS_STATE_SHELL_STAND)
+		{
+			if (untouchable == 0)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+		if(koopas->GetState() == KOOPAS_STATE_SHELL_STAND)
+		{
+			if (e->nx < 0)	koopas->SetShellStateMoveSpeedRight();
+			if (e->nx > 0)	koopas->SetShellStateMoveSpeedLeft();
+			koopas->SetState(KOOPAS_STATE_SHELL_MOVE);
+			untouchable = 1;
+			untouchable_start = GetTickCount64() - 2500;
+		}
+	}
+}
+
+
 
 //
 // Get animation ID for small Mario

@@ -18,10 +18,12 @@ koopas.txt
 # MARIO
 0	30	750
 
+#Goomba
+#2	200	750	100
+
 #Brick
 1	300	784	
-#Goomba
-#2	200	750	101
+
 
 #Koopas
 3	200	750	100
