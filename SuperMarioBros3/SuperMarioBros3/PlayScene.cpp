@@ -133,7 +133,11 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CKoopas(x, y, state); break;
 	}
 
-	case OBJECT_TYPE_BRICK: obj = new CBrick(x,y); break;
+	case OBJECT_TYPE_BRICK:
+	{
+		int aniID = atoi(tokens[3].c_str());
+		obj = new CBrick(x, y, aniID); break;
+	}
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
 	case OBJECT_TYPE_PLATFORM:
@@ -334,7 +338,7 @@ void CPlayScene::Update(DWORD dt)
 
 	if (cx < 0) cx = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, 620.0f /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, 0.0f /*620.0f*/ /*cy*/);
 
 	PurgeDeletedObjects();
 }

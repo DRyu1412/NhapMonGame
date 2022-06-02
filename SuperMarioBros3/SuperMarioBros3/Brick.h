@@ -11,7 +11,8 @@
 
 class CBrick : public CGameObject {
 public:
-	CBrick(float x, float y) : CGameObject(x, y) {}
+	int aniId;
+	CBrick(float x, float y, int aniID) : CGameObject(x, y) { this->aniId = aniID; }
 	void Render();
 	void Update(DWORD dt) {}
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
