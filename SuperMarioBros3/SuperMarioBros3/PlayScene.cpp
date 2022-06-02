@@ -12,6 +12,7 @@
 #include "VerticalPlatform.h"
 #include "HollowPlatform.h"
 #include "HollowPlatformBBox.h"
+#include "Background.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -239,6 +240,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 	break;
 
+	case OBJECT_TYPE_BACKGROUND: obj = new CBackground(x, y); break;
 
 	default:
 		DebugOut(L"[ERROR] Invalid object type: %d\n", object_type);
@@ -351,7 +353,7 @@ void CPlayScene::Update(DWORD dt)
 
 	if (cx < 0) cx = 0;
 
-	CGame::GetInstance()->SetCamPos(cx, /*0.0f*/ 620.0f /*cy*/);
+	CGame::GetInstance()->SetCamPos(cx, 0.0f /*620.0f*/ /*cy*/);
 
 	PurgeDeletedObjects();
 }
