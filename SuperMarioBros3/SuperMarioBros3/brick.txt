@@ -1,9 +1,35 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+#blue brick
 20001	372	153	387	168	20
-20002	64	11	83	30	10
+#yellow brick
+20002	52	52	67	67	30
+#gravel
+20100	1	52	16	67	30
+
+##green tube 
+#left side of tube's opening (upwards)
+20700	171	69	186	84	30
+#right side of tube's opening (upwards)
+20750	188	69	203	84	30
+#left side of tube's opening (downwards)
+20800	171	103	186	118	30
+#right side of tube's opening (downwards)
+20850	188	103	203	118	30
+#left side of tube's body
+20900	171	86	186	101	30
+#right side of tube's body
+20950	188	86	202	101	30
 
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 10000	20001	1000
 10001	20002	1000
+10100	20100	1000
+
+10271	20700	1000
+10272	20750	1000
+10281	20800	1000
+10282	20850	1000
+10291	20900	1000
+10292	20950	1000
