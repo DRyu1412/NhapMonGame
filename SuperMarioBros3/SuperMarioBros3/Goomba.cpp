@@ -37,10 +37,10 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (!e->obj->IsBlocking()) return; 
 	if (dynamic_cast<CGoomba*>(e->obj)) return; 
-	/*if(state == GOOMBA_STATE_WALKING)*/
 	if (e->ny != 0 )
 	{
-		vy = 0;
+		if(state == GOOMBA_STATE_WALKING) vy = 0;
+		if (state == GOOMBA_STATE_WING) vy = -0.4f;		
 	}
 	else if (e->nx != 0)
 	{
