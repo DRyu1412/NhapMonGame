@@ -9,6 +9,7 @@ brickplatform.txt
 koopas.txt
 hollowplatform.txt
 mushroom.txt
+background.txt
 #
 [OBJECTS]
 # type	x	y	extra_settings per object type
@@ -16,7 +17,7 @@ mushroom.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 
-
+10	1411	593
 
 #HollowPlatform
 502	282	720	16	16	3	5	71000	71010	71090	71900	71910	71990	71100	71110	71190
