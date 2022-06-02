@@ -11,11 +11,30 @@ CKoopas::CKoopas(float x, float y, int state) :CGameObject(x, y)
 
 void CKoopas::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - KOOPAS_BBOX_WIDTH / 2;
-	top = y - KOOPAS_BBOX_HEIGHT / 2;
-	right = left + KOOPAS_BBOX_WIDTH;
-	bottom = top + KOOPAS_BBOX_HEIGHT;
+	if (state == KOOPAS_STATE_WALKING)
+	{
+		left = x - KOOPAS_BBOX_WIDTH / 2;
+		top = y - KOOPAS_BBOX_HEIGHT / 2;
+		right = left + KOOPAS_BBOX_WIDTH;
+		bottom = top + KOOPAS_BBOX_HEIGHT;
+	}
+	else
+	{
+		left = x - KOOPAS_BBOX_WIDTH / 2;
+		top = y - KOOPAS_BBOX_SHELL_HEIGHT / 2;
+		right = left + KOOPAS_BBOX_WIDTH;
+		bottom = top + KOOPAS_BBOX_SHELL_HEIGHT;
+	}
+
 }
+	
+
+int CKoopas::IsBlocking()
+{
+	if (state == KOOPAS_STATE_SHELL_STAND) return 1;
+	else return 0;
+}
+
 
 void CKoopas::OnNoCollision(DWORD dt)
 {
@@ -56,6 +75,16 @@ void CKoopas::Render()
 		if (vx > 0)  aniId = ID_ANI_KOOPAS_WALKING_RIGHT;
 	}
 	
+	if (state == KOOPAS_STATE_SHELL_STAND)
+	{
+		aniId = ID_ANI_KOOPAS_SHELL_STAND;
+	}
+
+	if (state == KOOPAS_STATE_SHELL_MOVE)
+	{
+		aniId = ID_ANI_KOOPAS_SHELL_MOVE;
+	}
+	
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();
 }
@@ -70,10 +99,23 @@ void CKoopas::SetState(int state)
 			{
 				vx = -KOOPAS_WALKING_SPEED;
 			}
-
-		/*case KOOPAS_STATE_SHELL:
+			break;
+		case KOOPAS_STATE_SHELL_STAND:
 			vx = 0;
-			vy = 0;*/
-
+			vy = 0;
+			break;
+		case KOOPAS_STATE_SHELL_MOVE:
+			ay = KOOPAS_GRAVITY;
+			break;
 	}
+}
+
+void CKoopas::SetShellStateMoveSpeedLeft()
+{
+	vx = -0.1f;
+}
+
+void CKoopas::SetShellStateMoveSpeedRight()
+{
+	vx = 0.1f;
 }
