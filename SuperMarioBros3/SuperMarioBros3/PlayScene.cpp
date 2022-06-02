@@ -30,7 +30,7 @@ CPlayScene::CPlayScene(int id, LPCWSTR filePath):
 #define ASSETS_SECTION_SPRITES 1
 #define ASSETS_SECTION_ANIMATIONS 2
 
-#define MAX_SCENE_LINE 1024
+#define MAX_SCENE_LINE 102400
 
 void CPlayScene::_ParseSection_SPRITES(string line)
 {
