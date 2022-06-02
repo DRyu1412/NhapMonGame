@@ -78,7 +78,7 @@
     <ClCompile Include="VerticalPlatform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Koopas.cpp">
+    <ClCompile Include="Koopa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HollowPlatform.cpp">
@@ -164,7 +164,7 @@
     <ClInclude Include="VerticalPlatform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Koopas.h">
+    <ClInclude Include="Koopa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HollowPlatform.h">

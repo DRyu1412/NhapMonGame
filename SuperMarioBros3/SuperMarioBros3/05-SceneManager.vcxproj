@@ -156,7 +156,7 @@
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="HollowPlatform.cpp" />
     <ClCompile Include="HollowPlatformBBox.cpp" />
-    <ClCompile Include="Koopas.cpp" />
+    <ClCompile Include="Koopa.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mario.cpp" />
     <ClCompile Include="VerticalPlatform.cpp" />
@@ -184,7 +184,7 @@
     <ClInclude Include="HollowPlatform.h" />
     <ClInclude Include="HollowPlatformBBox.h" />
     <ClInclude Include="KeyEventHandler.h" />
-    <ClInclude Include="Koopas.h" />
+    <ClInclude Include="Koopa.h" />
     <ClInclude Include="Mario.h" />
     <ClInclude Include="VerticalPlatform.h" />
     <ClInclude Include="Platform.h" />

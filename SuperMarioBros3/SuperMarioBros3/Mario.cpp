@@ -7,7 +7,7 @@
 #include "Goomba.h"
 #include "Coin.h"
 #include "Portal.h"
-#include "Koopas.h"
+#include "Koopa.h"
 
 #include "Collision.h"
 
@@ -56,8 +56,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithCoin(e);
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
-	if (dynamic_cast<CKoopas*>(e->obj))
-		OnCollisionWithKoopas(e);
+	if (dynamic_cast<CKoopa*>(e->obj))
+		OnCollisionWithKoopa(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
@@ -114,9 +114,9 @@ void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
 }
 
-void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e)
+void CMario::OnCollisionWithKoopa(LPCOLLISIONEVENT e)
 {
-	CKoopas* koopas = dynamic_cast<CKoopas*>(e->obj);
+	CKoopa* koopas = dynamic_cast<CKoopa*>(e->obj);
 
 	// jump on top >> deflect a bit 
 	if (e->ny < 0)
