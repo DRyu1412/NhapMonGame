@@ -136,7 +136,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_BRICK:
 	{
 		int aniID = atoi(tokens[3].c_str());
-		obj = new CBrick(x, y, aniID); break;
+		int state = atoi(tokens[4].c_str());
+		obj = new CBrick(x, y, aniID, state); break;
 	}
 	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
 
@@ -411,4 +412,15 @@ void CPlayScene::PurgeDeletedObjects()
 	objects.erase(
 		std::remove_if(objects.begin(), objects.end(), CPlayScene::IsGameObjectDeleted),
 		objects.end());
+}
+
+void CPlayScene::AddObject(LPGAMEOBJECT o)
+{
+	int pos = 0;
+	for (int i = 0; i < objects.size(); i++)
+	{
+		if (dynamic_cast<CHollowPlatform*>(objects[i]))
+			pos++;
+	}
+	objects.insert(objects.begin()+pos, o);
 }
