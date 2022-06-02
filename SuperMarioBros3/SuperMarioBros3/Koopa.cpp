@@ -82,10 +82,14 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		vy += ay * dt;
 		vx += ax * dt;
-		if (x<left || x>right)
+		if (state == KOOPAS_STATE_WALKING)
 		{
-			vx = -vx;
+			if (x<left || x>right)
+			{
+				vx = -vx;
+			}
 		}
+		
 		CGameObject::Update(dt, coObjects);
 		CCollision::GetInstance()->Process(this, dt, coObjects);
 

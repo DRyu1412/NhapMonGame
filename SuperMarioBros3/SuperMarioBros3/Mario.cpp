@@ -3,12 +3,14 @@
 
 #include "Mario.h"
 #include "Game.h"
+#include "PlayScene.h"
 
 #include "Goomba.h"
 #include "Coin.h"
 #include "Portal.h"
 #include "Koopa.h"
 #include "Mushroom.h"
+#include "Brick.h"
 
 #include "Collision.h"
 
@@ -61,6 +63,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithKoopa(e);
 	if (dynamic_cast<CMushroom*>(e->obj))
 		OnCollisionWithMushroom(e);
+	if (dynamic_cast<CBrick*>(e->obj))
+		OnCollisionWithBrick(e);
 }
 
 void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
@@ -68,20 +72,20 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e)
 	CMushroom* mushroom = dynamic_cast<CMushroom*>(e->obj);
 	if (mushroom->GetType() == MUSHROOM_TYPE_RED)
 	{
-		if (mushroom->GetState() == MUSHROOM_STATE_IDLE)
-			if (e->ny > 0)
-			{
-				vy = 0.4f;
-				mushroom->SetState(MUSHROOM_STATE_DROP);
-			}
-
-		if (mushroom->GetState() == MUSHROOM_STATE_DROP) 
-		{
 			SetLevel(MARIO_LEVEL_BIG);
 			e->obj->Delete();
-		}
 	}
 		
+}
+
+void CMario::OnCollisionWithBrick(LPCOLLISIONEVENT e)
+{
+	CBrick* brick = dynamic_cast<CBrick*>(e->obj);
+	if (brick->GetState() == BRICK_STATE_QUESTIONBRICK)
+	{
+		if (e->ny > 0) brick->SetState(BRICK_STATE_BREAK);
+	}
+	
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)

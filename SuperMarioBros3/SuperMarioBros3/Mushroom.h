@@ -52,7 +52,7 @@ public:
 		this->type = type;
 		this->initialPositionY = y;
 		this->ID_ANI_MUSHROOM = ID_ANI_MUSHROOM;
-		SetState(MUSHROOM_STATE_IDLE);
+		SetState(MUSHROOM_STATE_DROP);
 	}
 	void SetState(int state);
 	int GetType() { return this->type; }
