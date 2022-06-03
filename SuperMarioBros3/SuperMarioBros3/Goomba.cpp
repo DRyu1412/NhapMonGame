@@ -47,7 +47,7 @@ void CGoomba::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (e->ny != 0 )
 	{
 		if(state == GOOMBA_STATE_WALKING) vy = 0;
-		if (state == GOOMBA_STATE_WING) vy = -0.4f;		
+		if (state == GOOMBA_STATE_WING) vy = 0;		
 	}
 	else if (e->nx != 0)
 	{

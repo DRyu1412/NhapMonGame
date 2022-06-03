@@ -84,7 +84,7 @@ void CKoopa::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		vx += ax * dt;
 		if (state == KOOPAS_STATE_WALKING)
 		{
-			if (x<=left+1 || x>=right-1)
+			if (x<=left+2 || x>=right-2)
 			{
 				vx = -vx;
 			}

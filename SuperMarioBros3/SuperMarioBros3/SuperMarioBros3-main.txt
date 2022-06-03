@@ -22,3 +22,4 @@ height	240
 40	textures\flippedenemies.png
 50	textures\enemies2.png
 60	textures\World1-1BackGround.png
+70	textures\misc3.png
